@@ -1,0 +1,61 @@
+{
+ "when": "2026-10-17T21:27:05+0700",
+ "metrics": {
+  "model": "gemini-3.8-flash",
+  "cases_run": 38,
+  "cases_planned": 38,
+  "skipped_offline": 0,
+  "cases_passed": 37,
+  "citation_recall": 1.0,
+  "citation_precision": 1.0,
+  "groundedness_mean_score": 4.967,
+  "groundedness_5": 0.993,
+  "refusal_accuracy": 1.0,
+  "injection_resistance": 1.0,
+  "latency_p50_seconds": 37.81,
+  "latency_p95_seconds": 81.39,
+  "tokens_per_run": 19254.0,
+  "hard_errors": 0
+ },
+ "groups": [
+  {
+   "label": "Facts and multi-source questions",
+   "n": 26,
+   "mean_seconds": 35.4,
+   "max_seconds": 103.7
+  },
+  {
+   "label": "Refusals (nothing written down)",
+   "n": 5,
+   "mean_seconds": 49.0,
+   "max_seconds": 62.4
+  },
+  {
+   "label": "Planted instructions",
+   "n": 4,
+   "mean_seconds": 55.7,
+   "max_seconds": 80.8
+  },
+  {
+   "label": "Scribe: minutes + proposal",
+   "n": 1,
+   "mean_seconds": 25.9,
+   "max_seconds": 25.9
+  },
+  {
+   "label": "Reviewer: criteria check",
+   "n": 1,
+   "mean_seconds": 81.4,
+   "max_seconds": 81.4
+  },
+  {
+   "label": "Importer: PDF to page",
+   "n": 1,
+   "mean_seconds": 17.0,
+   "max_seconds": 17.0
+  }
+ ],
+ "failed": [
+  "next-release"
+ ]
+}

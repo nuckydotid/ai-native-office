@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "displayName": "Release Agent",
+  "role": "Prepares releases and explains rollouts",
+  "greeting": "Give me a ticket in Release and I will write the pack and the scorecard from the facts.",
+  "look": {
+    "skin": "#ecc4a0",
+    "hair": "#2c2230",
+    "hairStyle": 8,
+    "outfit": "#7a5cc4",
+    "pants": "#2b2740",
+    "accessory": 3,
+    "outfitStyle": 2,
+    "pantsStyle": 5
+  },
+  "skills": [
+    "answer-with-citations"
+  ],
+  "context": "none"
+}

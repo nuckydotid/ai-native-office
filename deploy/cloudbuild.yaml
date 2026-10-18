@@ -1,0 +1,14 @@
+# Generic image build used by deploy/deploy.sh. The source is a clean copy of the repo (tracked and unignored files only).
+# Substitutions:
+#   _IMAGE       full Artifact Registry path with a tag
+#   _DOCKERFILE  path of the Dockerfile, relative to the source root
+#   _CONTEXT     build context directory, relative to the source root
+steps:
+  - name: gcr.io/cloud-builders/docker
+    env: ["DOCKER_BUILDKIT=1"]
+    args: ["build", "-f", "${_DOCKERFILE}", "-t", "${_IMAGE}", "${_CONTEXT}"]
+images: ["${_IMAGE}"]
+options:
+  # Required when a build runs as a user-specified service account (studio-build); logs go to Cloud Logging.
+  logging: CLOUD_LOGGING_ONLY
+  machineType: E2_HIGHCPU_8

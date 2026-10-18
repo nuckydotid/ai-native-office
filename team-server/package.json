@@ -1,0 +1,28 @@
+{
+  "name": "team-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "The Bun web service: office, chat, Kanban and docs sync, guest sign-in and the hosted demo for one workspace. Runs on Cloud Run.",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "TEAM_DEV_AUTH=1 bun --watch src/index.ts",
+    "start": "bun src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "hono": "^4.13.8",
+    "jose": "^6.2.12",
+    "pg": "^8.16.0"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.3.0",
+    "@types/bun": "^1.4.2",
+    "@types/pg": "^8.15.0",
+    "@types/ws": "^8.5.13",
+    "typescript": "~6.0.3",
+    "ws": "^8.18.0"
+  },
+  "packageManager": "bun@1.4.2"
+}

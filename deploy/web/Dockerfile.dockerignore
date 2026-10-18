@@ -1,0 +1,22 @@
+# Keeps heavy and sensitive paths out of the build context of deploy/web/Dockerfile (context = repo root).
+**/node_modules
+**/dist
+**/.git
+.git
+**/google-client.json
+**/.env
+**/.env.*
+**/*.tfvars
+**/*.tfstate
+**/*.tfstate.*
+**/*.pem
+**/*.key
+**/service-account*.json
+**/.DS_Store
+**/*.log
+agent-service
+# Every doc is kept out of the build context except the seeded demo workspaces, which the web image copies.
+docs/*
+!docs/demo-data
+!docs/demo-data-web
+deploy/.env.gcp

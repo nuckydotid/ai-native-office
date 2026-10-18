@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+
+# A Google OAuth client file from the retired desktop app, if one is still lying around. Never commit it.
+src-tauri/google-client.json

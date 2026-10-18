@@ -1,0 +1,30 @@
+{
+  "title": "Daily standup, Thursday 15 October 2026",
+  "messages": [
+    { "who": "owen", "text": "Morning everyone. Quick round first, then two topics: the Harbourline pilot rollout and the slow minute on the sync gateway this morning. Kai, you start." },
+    { "who": "kai", "text": "Yesterday I finished the operation log table for offline sync and the batch upload endpoint. Today is the client queue. Two conflict-rule tests are still red, so that is where the day goes." },
+    { "who": "zara", "text": "Barcode scanning works on both test phones. The old Android 10 phone is slow to focus, so today I am trying continuous autofocus. Not blocked." },
+    { "who": "leo", "text": "Signature capture is in review. Today I start the job list filters. Also, the sync gateway answered very slowly for about a minute around nine." },
+    { "who": "ines", "text": "That slow minute is how the September outage started, and we only found out because a customer phoned us. Kai, where are we on the expiry alert from the postmortem?" },
+    { "who": "kai", "text": "Not started. The renewal job is back on, but nothing warns us if it fails. It is ticket 13 on the Plan page. I can do the alert this week, 21 days before expiry." },
+    { "who": "ines", "text": "Please do. That goes to the top of your list. It pages the on-call when it fires." },
+    { "who": "owen", "text": "Good. Next topic: the pilot. Zara asked yesterday whether offline sync goes on for every Harbourline technician or only for the first group." },
+    { "who": "zara", "text": "Right. If something goes wrong in the field, I would rather it hurt a few people than all of them." },
+    { "who": "ines", "text": "Agreed. Decision: offline sync goes to the first pilot group only, behind the feature flag. If the first two weeks are clean, we open it to everyone else." },
+    { "who": "leo", "text": "Does the flag live on the server or in the app build?" },
+    { "who": "kai", "text": "On the server, so we can switch a group on or off without a release." },
+    { "who": "zara", "text": "Back to scanning. Continuous autofocus fixes the slow focus on the Android 10 phone, but it drains the battery faster. I would use it only on Android 10 and older and keep normal focus everywhere else." },
+    { "who": "owen", "text": "Any objection? Okay. Decision: continuous autofocus is the default on Android 10 and older, normal focus on newer phones." },
+    { "who": "zara", "text": "Good. That stays inside the scanner ticket, so no new ticket is needed." },
+    { "who": "owen", "text": "Next, Vietnamese. The translator sent a first draft, but no native speaker has read it yet. Do we ship the draft in the pilot, or wait for the review?" },
+    { "who": "ines", "text": "Wait. A wrong word on a safety checklist is worse than no translation. Decision: Vietnamese ships only after a native speaker has reviewed it." },
+    { "who": "owen", "text": "Understood. I will book a reviewer this week." },
+    { "who": "owen", "text": "Leo, you are the release owner for the 27 October train. Can you draft the release notes by Monday?" },
+    { "who": "leo", "text": "Yes, I will have them ready by Monday." },
+    { "who": "leo", "text": "One thing I cannot answer: will all of Harbourline's technicians get the next Android update, or are some phones stuck on Android 10 for good? It decides how long we have to support it." },
+    { "who": "ines", "text": "I do not know, and I do not think anyone does yet. Let us leave it open for now." },
+    { "who": "kai", "text": "A risk for the record: if the two failing conflict tests turn out to be a design problem and not a bug, the offline sync date on the roadmap could slip. I should know more tomorrow." },
+    { "who": "ines", "text": "Noted, we keep the date for now. Owen, one more thing: please send me the PushRelay renewal numbers by Friday so I can decide before the notice deadline." },
+    { "who": "owen", "text": "Will do. Thanks all, that is the standup." }
+  ]
+}

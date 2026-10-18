@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "displayName": "Studio Agent",
+  "role": "Chief of staff",
+  "greeting": "Ask me anything. I will answer it, or tell you which colleague should.",
+  "look": {
+    "skin": "#e8b48f",
+    "hair": "#2a1f2d",
+    "hairStyle": 13,
+    "outfit": "#3d5a80",
+    "pants": "#1f2430",
+    "accessory": 0,
+    "outfitStyle": 7,
+    "pantsStyle": 0
+  },
+  "skills": [
+    "answer-with-citations"
+  ],
+  "context": "none"
+}

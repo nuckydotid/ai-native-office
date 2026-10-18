@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  app:
+    name: Web app (types, UI rules, shared copies, tests, build)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+
+  server:
+    name: Web service (team-server)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      - run: bun install --frozen-lockfile
+        working-directory: team-server
+      - run: bun run typecheck
+        working-directory: team-server
+      - run: bun run test
+        working-directory: team-server
+
+  sample-app:
+    name: Sample app (typecheck, lint, unit, e2e, build)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: sample-app/package-lock.json
+      - run: npm ci
+        working-directory: sample-app
+      - run: npx playwright install --with-deps chromium
+        working-directory: sample-app
+      - run: bash ci/hermetic-test.sh all
+        working-directory: sample-app
+
+  agents:
+    name: Agent service (pytest, offline)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: agent-service/pyproject.toml
+      - run: pip install -e ".[dev]"
+        working-directory: agent-service
+      - run: pytest -q
+        working-directory: agent-service
+        env:
+          MODEL_BACKEND: fake
+          KNOWLEDGE_BACKEND: memory
+          AUTH_MODE: none

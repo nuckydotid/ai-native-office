@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "displayName": "Importer Agent",
+  "role": "Document importer",
+  "greeting": "Give me a PDF or a picture and I will turn it into a Docs page.",
+  "look": {
+    "skin": "#f6d5b8",
+    "hair": "#2fa38a",
+    "hairStyle": 5,
+    "outfit": "#73daca",
+    "pants": "#15171f",
+    "accessory": 6,
+    "outfitStyle": 5,
+    "pantsStyle": 3
+  },
+  "skills": [],
+  "context": "none"
+}

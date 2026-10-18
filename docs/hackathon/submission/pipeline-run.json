@@ -1,0 +1,14 @@
+{
+ "note": "Ranges over repeated runs of the same ticket flow on the deployed demo, 18 to 19 October 2026. Gemini drafts and Cloud Build times vary run to run.",
+ "rows": [
+  ["Spec drafted by the Planner Agent", "20 to 38 s"],
+  ["Design drafted by the Designer Agent", "33 to 38 s"],
+  ["Change set by the Developer Agent", "53 to 86 s"],
+  ["Cloud Build: build of the change set", "186 to 228 s"],
+  ["Cloud Build: 8 unit tests, coverage", "132 to 156 s, 100%"],
+  ["Release image built", "171 to 174 s"],
+  ["Vulnerability scan of the image", "124 to 145 s"],
+  ["Release pack by the Release Agent", "15 to 21 s"],
+  ["Canary 10, 50, 100 percent, rollback", "verified live"]
+ ]
+}

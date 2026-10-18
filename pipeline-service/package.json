@@ -1,0 +1,23 @@
+{
+  "name": "studio-pipeline",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "The private delivery-pipeline service: real builds, tests, scans, rollouts and budgets on Google Cloud, behind small drivers so every test runs offline.",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "bun src/index.ts",
+    "dev": "PIPELINE_AUTH=none bun --watch src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "hono": "^4.13.8",
+    "jose": "^6.2.12"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.2",
+    "typescript": "~6.0.3"
+  },
+  "packageManager": "bun@1.4.2"
+}

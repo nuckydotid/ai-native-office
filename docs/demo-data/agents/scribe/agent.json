@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "displayName": "Scribe Agent",
+  "role": "Meeting scribe",
+  "greeting": "End a meeting and I will write the minutes, the decisions and the tickets worth proposing.",
+  "look": {
+    "skin": "#b9805a",
+    "hair": "#6b3fa0",
+    "hairStyle": 7,
+    "outfit": "#e0af68",
+    "pants": "#2f3b52",
+    "accessory": 2,
+    "outfitStyle": 1,
+    "pantsStyle": 5
+  },
+  "skills": [
+    "write-minutes"
+  ],
+  "context": "none"
+}

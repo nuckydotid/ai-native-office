@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "displayName": "Developer Agent",
+  "role": "Writes the change set a ticket needs",
+  "greeting": "Give me a ticket and I will write the code and its unit tests, as whole files a person can read.",
+  "look": {
+    "skin": "#e8b48b",
+    "hair": "#241a14",
+    "hairStyle": 0,
+    "outfit": "#3f6db3",
+    "pants": "#2a2f3d",
+    "accessory": 0,
+    "outfitStyle": 1,
+    "pantsStyle": 4
+  },
+  "skills": [
+    "answer-with-citations"
+  ],
+  "context": "none"
+}

@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "displayName": "Designer Agent",
+  "role": "Designs the screens a ticket needs",
+  "greeting": "Give me a ticket and I will draw the flow, a prototype and the checks it meets.",
+  "look": {
+    "skin": "#f2c9a4",
+    "hair": "#3b2a22",
+    "hairStyle": 6,
+    "outfit": "#2f8f83",
+    "pants": "#22343a",
+    "accessory": 1,
+    "outfitStyle": 6,
+    "pantsStyle": 0
+  },
+  "skills": [
+    "answer-with-citations"
+  ],
+  "context": "none"
+}

@@ -1,0 +1,66 @@
+@import 'tailwindcss';
+/* Roboto is bundled with the app (a variable font, weights 100 to 900), so it works offline. */
+@import '@fontsource-variable/roboto';
+@plugin '../hero.ts';
+@source '../node_modules/@heroui/theme/dist/**/*.{js,mjs,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Fonts. Every piece of text uses Roboto, except code, which uses the font VS Code's editor uses by default on a
+ * Mac (`editor.fontFamily`). Components never name a font: they use `font-sans` (the default) or `font-mono` for code.
+ */
+@theme {
+  --font-sans: 'Roboto Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: Menlo, Monaco, 'Courier New', monospace;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Dashboard: dashes that flow along the lines of the architecture picture, and a soft pulse on live status dots. */
+@keyframes wts-flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+@keyframes wts-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+.wts-flow {
+  animation: wts-flow 1.4s linear infinite;
+}
+.wts-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: wts-pulse 2s ease-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wts-flow,
+  .wts-pulse {
+    animation: none;
+  }
+}
+
+/* Pixel art (avatar heads, the office): never smoothed. */
+.wts-pixel {
+  image-rendering: pixelated;
+}
+
+/* A scrolling list that places itself (chat history): the browser's own scroll anchoring would fight with it. */
+.wts-no-anchor {
+  overflow-anchor: none;
+}

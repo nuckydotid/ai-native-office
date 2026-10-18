@@ -1,0 +1,10 @@
+{
+  "checks": [
+    { "path": "/health", "status": 200, "json": { "ok": true } },
+    { "path": "/", "status": 200, "contains": "Northwind Customer Portal" },
+    { "path": "/", "status": 200, "contains": "Synthetic demo" },
+    { "path": "/api/orders", "status": 200, "json": true },
+    { "path": "/api/orders/o-1001", "status": 200, "json": true },
+    { "path": "/api/summary", "status": 200, "json": true }
+  ]
+}

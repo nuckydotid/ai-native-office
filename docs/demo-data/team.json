@@ -1,0 +1,10 @@
+{
+  "name": "Northwind Field App",
+  "members": [
+    { "handle": "ines", "name": "Ines Carvalho", "role": "founder" },
+    { "handle": "owen", "name": "Owen Whitaker", "role": "pm" },
+    { "handle": "kai", "name": "Kai Nakamura", "role": "frontend" },
+    { "handle": "zara", "name": "Zara Haddad", "role": "frontend" },
+    { "handle": "leo", "name": "Leo Brandt", "role": "frontend" }
+  ]
+}

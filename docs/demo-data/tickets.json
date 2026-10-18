@@ -1,0 +1,249 @@
+[
+  {
+    "key": 1,
+    "title": "Fix crash when attaching more than 10 photos to an inspection",
+    "body": "## Problem\nThe app closes without warning when a technician adds the 11th photo to an inspection on a phone with 3 GB of memory. Two customers reported it in September.\n\n## Acceptance criteria\n- [x] Adding photos up to the app's limit does not crash on the two lowest-memory test phones.\n- [x] Thumbnails are made at a reduced size and released when the screen closes.\n- [x] Memory use stays flat while photos are added, checked with the profiler on one iPhone and one Android phone.\n- [x] A regression test adds 12 photos in a row.",
+    "status": "done",
+    "priority": "urgent",
+    "assignee": "kai",
+    "labels": [
+      "bug",
+      "mobile",
+      "photos"
+    ],
+    "points": 3,
+    "pr": "https://example.com/northwind/field-app/pull/41",
+    "notes": "## What changed\nPhotos were decoded at full size to make thumbnails. Thumbnails are now made from a downscaled copy and the full image is released straight away.\n\n## How it was checked\nProfiler run on one iPhone and one Android phone; memory stayed flat. The regression test is in the pull request.\n\n## Follow-ups\nRetrying failed uploads is a separate ticket (#5)."
+  },
+  {
+    "key": 2,
+    "title": "Send a push notification when a job is assigned",
+    "body": "## Why\nTechnicians learn about a new job only when they open the app. A push notification gets the job to them within seconds, which is what dispatchers keep asking for.\n\n## Acceptance criteria\n- [x] Assigning a job sends one push notification to the assigned technician on iOS and on Android.\n- [x] Tapping the notification opens that job.\n- [x] A retry after a network error never sends the same notification twice.\n- [x] The vendor is called through one module so it can be replaced (see ADR-0002).\n- [x] Technicians can switch assignment notifications off in the app settings.",
+    "status": "done",
+    "priority": "high",
+    "assignee": "zara",
+    "labels": [
+      "feature",
+      "notifications",
+      "backend"
+    ],
+    "points": 8,
+    "pr": "https://example.com/northwind/field-app/pull/44",
+    "notes": "## What changed\nThe server sends a notification when the assignee of a job changes. The notification carries the job id and nothing else; the title and text are filled in on the phone.\n\n## Decisions\nThe job id and the assignee form the idempotency key, so a retry is a no-op for the vendor.\n\n## Not done\nA daily summary notification is out of scope."
+  },
+  {
+    "key": 3,
+    "title": "Show a sync status banner on the job list",
+    "body": "## Why\nTechnicians cannot tell whether the list in front of them is fresh. A banner should say when the list was last updated, and when the phone has no connection.\n\n## Acceptance criteria\n- [x] The banner reads \"Updated just now\", \"Updating\" or \"No connection, showing the list from <time>\".\n- [x] The banner does not push the list down when it appears.\n- [x] The text is readable in the light and dark system themes and is read out by the screen reader.",
+    "status": "done",
+    "priority": "medium",
+    "assignee": "leo",
+    "labels": [
+      "feature",
+      "ux",
+      "sync"
+    ],
+    "points": 5,
+    "pr": "https://example.com/northwind/field-app/pull/47",
+    "notes": "## What changed\nA small banner above the job list, driven by the last successful sync time and the connection state. It overlays the top of the list instead of pushing it.\n\n## How it was checked\nTried with the connection switched off in the middle of a sync, on one iPhone and one Android phone, in both themes."
+  },
+  {
+    "key": 4,
+    "title": "Capture a customer signature on the completion screen",
+    "body": "## Why\nCustomers sign a paper form at the end of an inspection today. We want the signature inside the inspection record.\n\n## Acceptance criteria\n- [x] The completion screen has a signature box the customer can sign with a finger.\n- [x] A cleared signature can be redrawn.\n- [x] The signature is saved as an image attached to the inspection and shown in the report.\n- [ ] The box works on a small screen (320 points wide) without the keyboard covering it.\n- [x] The complete button stays disabled until a signature exists, for jobs that need one.",
+    "status": "review",
+    "priority": "high",
+    "assignee": "leo",
+    "labels": [
+      "feature",
+      "inspection"
+    ],
+    "points": 5,
+    "pr": "https://example.com/northwind/field-app/pull/52",
+    "notes": "## State of the work\nThe signature box, redraw and saving are done and tested on two large phones.\n\n## Not yet checked\nThe small-screen case. I have not tried a 320-point screen, so I do not know whether the keyboard covers the box. A reviewer with a small phone, please try it."
+  },
+  {
+    "key": 5,
+    "title": "Retry failed photo uploads with exponential backoff",
+    "body": "## Why\nWhen a photo upload fails on a weak connection the technician has to attach the photo again. Uploads should retry by themselves.\n\n## Acceptance criteria\n- [x] A failed upload is retried up to 5 times, with the delay doubling from 2 seconds.\n- [x] Errors that retrying cannot fix (rejected file, no permission) are not retried.\n- [x] After the last failed retry the photo stays in the upload queue and is marked as waiting.\n- [x] The inspection shows how many photos are still waiting.\n- [x] Unit tests cover the delay sequence and the errors that are not retried.",
+    "status": "review",
+    "priority": "medium",
+    "assignee": "kai",
+    "labels": [
+      "bug",
+      "reliability",
+      "photos"
+    ],
+    "points": 5,
+    "pr": "https://example.com/northwind/field-app/pull/53",
+    "notes": "## State of the work\nAll five criteria are met and the unit tests pass. I tested by switching the phone to airplane mode in the middle of an upload on one iPhone and one Android phone.\n\n## Notes for the reviewer\nThe retry timing is in one file, so the numbers are easy to change after the pilot."
+  },
+  {
+    "key": 6,
+    "title": "Add Vietnamese translation for checklist screens",
+    "body": "## Why\nOne of our prospects has technicians who work in Vietnamese. Checklists are the screens they use all day.\n\n## Acceptance criteria\n- [x] Every string on the checklist screens exists in the Vietnamese language file.\n- [x] Dates and numbers follow Vietnamese conventions.\n- [x] The app falls back to English for any string that is missing.\n- [ ] A native speaker has reviewed the wording of the checklist screens.",
+    "status": "review",
+    "priority": "medium",
+    "assignee": "zara",
+    "labels": [
+      "i18n",
+      "feature"
+    ],
+    "points": 3,
+    "pr": "https://example.com/northwind/field-app/pull/55",
+    "notes": "## State of the work\nThe strings and formats are in. The translator sent a first draft on 8 October.\n\n## Not done\nThe wording has not been reviewed by a native speaker yet."
+  },
+  {
+    "key": 7,
+    "title": "Offline sync: operation log and batch upload",
+    "body": "## Why\nTechnicians lose time and trust when the app needs a signal. ADR-0001 sets the design. This ticket builds the server side and connects the phone's queue to it.\n\n## Acceptance criteria\n- [ ] The server accepts uploaded operations in batches and applies them in order.\n- [ ] An operation log is kept on the server for the period set in ADR-0001.\n- [ ] Conflicting edits to the same field follow the rule in ADR-0001.\n- [ ] Uploading the same batch twice changes nothing.\n- [ ] A phone with a wrong clock cannot overwrite newer work.\n- [ ] The feature sits behind a server-side flag, so a pilot group can be switched on and off without a release.\n- [ ] Tests cover clock skew, duplicate uploads and a phone that stays offline for several days.",
+    "status": "in_progress",
+    "priority": "high",
+    "assignee": "kai",
+    "labels": [
+      "feature",
+      "sync",
+      "backend"
+    ],
+    "points": 13,
+    "pr": null,
+    "notes": "## State of the work\nThe operation log table and the batch upload endpoint are done. The client queue is being connected to them.\n\n## Problem\nTwo conflict-rule tests fail when two edits arrive in the same second. I am finding out whether this is a bug or a gap in the design."
+  },
+  {
+    "key": 8,
+    "title": "Barcode scanning for equipment tags",
+    "body": "## Why\nTechnicians type equipment tag numbers by hand today, and typos send inspections to the wrong machine. Two customers asked for scanning.\n\n## Acceptance criteria\n- [ ] The app scans one-dimensional barcodes and QR codes from equipment tags.\n- [ ] A scanned tag opens the equipment record; an unknown tag offers manual entry.\n- [ ] A torch button helps in dark plant rooms.\n- [ ] Scanning works on the oldest Android phone we support, with a focus time under 2 seconds.\n- [ ] Camera permission is asked for only when the scanner opens, with a plain explanation.",
+    "status": "in_progress",
+    "priority": "high",
+    "assignee": "zara",
+    "labels": [
+      "feature",
+      "scanner",
+      "mobile"
+    ],
+    "points": 8,
+    "pr": null,
+    "notes": "## State of the work\nScanning works on both test phones. The camera permission flow is done.\n\n## Problem\nThe oldest Android phone is slow to focus. Trying continuous autofocus."
+  },
+  {
+    "key": 9,
+    "title": "Filters on the job list: status, site and date",
+    "body": "## Why\nDispatchers assign many jobs to one technician, and the list gets long. Technicians want to see today's jobs at a site, or only the ones that are not finished.\n\n## Acceptance criteria\n- [ ] The list can be filtered by status, site and date.\n- [ ] Active filters are shown as chips that can be removed one by one.\n- [ ] The chosen filters are remembered when the app is reopened.\n- [ ] The empty state says which filter hides the jobs and offers to clear it.",
+    "status": "in_progress",
+    "priority": "medium",
+    "assignee": "leo",
+    "labels": [
+      "feature",
+      "ux"
+    ],
+    "points": 5,
+    "pr": null,
+    "notes": "## State of the work\nJust started. The status filter is working in a prototype."
+  },
+  {
+    "key": 10,
+    "title": "Draft the pilot success criteria for Harbourline",
+    "body": "## Why\nA pilot without agreed measures ends in an argument about whether it worked. We want Harbourline's contact and us to agree, before the start, on what we will measure.\n\n## Acceptance criteria\n- [ ] The draft lists the measures and a target for each.\n- [ ] For each measure it says where the number comes from.\n- [ ] Ines has read it.\n- [ ] It has been sent to Harbourline's named contact.",
+    "status": "in_progress",
+    "priority": "high",
+    "assignee": "owen",
+    "labels": [
+      "docs",
+      "pilot"
+    ],
+    "points": 3,
+    "pr": null,
+    "notes": "## State of the work\nFirst draft in progress. This is a document ticket: there is no code, so this file is where the work lives.\n\n## Open\nI still need a baseline for how many inspections a technician finishes a day on paper."
+  },
+  {
+    "key": 11,
+    "title": "Dark mode for inspection screens",
+    "body": "## Why\nSome technicians work in dark rooms and prefer a dark screen. It came up in feedback but was not asked for by any pilot candidate, so it waits.\n\n## Acceptance criteria\n- [ ] Every inspection screen has a dark variant that follows the phone's setting.\n- [ ] Photos, signatures and report previews are readable in both themes.\n- [ ] Contrast meets the accessibility guidelines in both themes.",
+    "status": "todo",
+    "priority": "low",
+    "assignee": null,
+    "labels": [
+      "feature",
+      "design"
+    ],
+    "points": 8,
+    "pr": null,
+    "notes": "Not started."
+  },
+  {
+    "key": 12,
+    "title": "Export an inspection report as PDF",
+    "body": "## Why\nCustomers want to attach a finished inspection to their own records and to email it to their own customers.\n\n## Acceptance criteria\n- [ ] A finished inspection can be exported as one PDF.\n- [ ] The PDF shows the checklist answers, photos and signature in the order of the inspection.\n- [ ] The file name contains the job number and the date.\n- [ ] A long inspection with many photos still produces a PDF that opens on a phone.",
+    "status": "todo",
+    "priority": "medium",
+    "assignee": null,
+    "labels": [
+      "feature",
+      "reports"
+    ],
+    "points": 8,
+    "pr": null,
+    "notes": "Not started."
+  },
+  {
+    "key": 13,
+    "title": "Alert before the sync gateway certificate expires",
+    "body": "## Why\nThis is an action item from the postmortem of the September sync outage. The certificate expired without any warning, and we found out from a customer.\n\n## Acceptance criteria\n- [ ] An alert fires 21 days before the certificate expires.\n- [ ] A second alert fires at 7 days and a third at 1 day.\n- [ ] The alert pages the on-call engineer and links to the incident runbook.\n- [ ] The alert is tested in staging with a certificate that expires soon.",
+    "status": "todo",
+    "priority": "high",
+    "assignee": null,
+    "labels": [
+      "reliability",
+      "ops",
+      "postmortem"
+    ],
+    "points": 3,
+    "pr": null,
+    "notes": "Not started."
+  },
+  {
+    "key": 14,
+    "title": "Move shared API keys into the secret manager and rotate them",
+    "body": "## Why\nA few keys are still shared in team password notes. The security basics say secrets live in the secret manager and are rotated regularly.\n\n## Acceptance criteria\n- [ ] A list of every key in use, who uses it and where it is stored.\n- [ ] Each key is moved into the secret manager and read from there by the service that needs it.\n- [ ] Each key is rotated, and the old value is revoked.\n- [ ] The date of the next rotation is recorded for each key.",
+    "status": "todo",
+    "priority": "high",
+    "assignee": null,
+    "labels": [
+      "security",
+      "ops"
+    ],
+    "points": 5,
+    "pr": null,
+    "notes": "Not started."
+  },
+  {
+    "key": 15,
+    "title": "Pilot dashboard: inspections per technician per day",
+    "body": "## Why\nThe pilot success criteria need numbers. A small dashboard that shows inspections per technician per day saves us from counting by hand.\n\n## Acceptance criteria\n- [ ] A page for the pilot customer's workspace shows inspections per technician per day for the last four weeks.\n- [ ] The page shows how many technicians were active in each week.\n- [ ] Numbers can be exported as a CSV file.",
+    "status": "todo",
+    "priority": "medium",
+    "assignee": null,
+    "labels": [
+      "analytics",
+      "pilot"
+    ],
+    "points": 5,
+    "pr": null,
+    "notes": "Not started. Wait for the pilot success criteria (#10) so we build the numbers that are agreed."
+  },
+  {
+    "key": 16,
+    "title": "Larger tap targets on checklist rows",
+    "body": "## Why\nTechnicians wear gloves. Small tap targets on checklist rows cause wrong taps.\n\n## Acceptance criteria\n- [ ] Every tappable part of a checklist row is at least 48 points high.\n- [ ] The spacing between rows does not hide the next row on a small screen.\n- [ ] A person wearing work gloves can tick ten rows in a row without a wrong tap.",
+    "status": "todo",
+    "priority": "low",
+    "assignee": null,
+    "labels": [
+      "accessibility",
+      "ux"
+    ],
+    "points": 2,
+    "pr": null,
+    "notes": "Not started."
+  }
+]

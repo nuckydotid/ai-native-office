@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "displayName": "Reviewer Agent",
+  "role": "Checks work before it goes to review",
+  "greeting": "Show me a ticket and I will check its notes against the acceptance criteria before it goes to review.",
+  "look": {
+    "skin": "#8d5a3c",
+    "hair": "#101014",
+    "hairStyle": 3,
+    "outfit": "#d1495b",
+    "pants": "#3a4052",
+    "accessory": 7,
+    "outfitStyle": 3,
+    "pantsStyle": 4
+  },
+  "skills": [
+    "check-against-criteria"
+  ],
+  "context": "none"
+}

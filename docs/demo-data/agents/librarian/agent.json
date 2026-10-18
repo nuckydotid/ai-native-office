@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "displayName": "Librarian Agent",
+  "role": "Knowledge keeper",
+  "greeting": "Ask me where something is written down. I only answer from the team's own records, and I show my sources.",
+  "look": {
+    "skin": "#f6d5b8",
+    "hair": "#a0a4b0",
+    "hairStyle": 4,
+    "outfit": "#8a6a4f",
+    "pants": "#3b4a3f",
+    "accessory": 1,
+    "outfitStyle": 6,
+    "pantsStyle": 2
+  },
+  "skills": [
+    "answer-with-citations"
+  ],
+  "context": "none"
+}

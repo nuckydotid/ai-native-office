@@ -1,0 +1,42 @@
+[project]
+name = "studio-agent-service"
+version = "0.1.0"
+description = "The AI brain of Worktrees Studio: Google ADK agents on Gemini (Vertex AI), served as FastAPI + SSE."
+requires-python = ">=3.12"
+dependencies = [
+  "google-adk==2.12.0",
+  "google-genai==2.31.0",
+  "google-cloud-firestore==2.34.1",
+  "google-auth==2.62.0",
+  "fastapi==0.141.1",
+  "uvicorn[standard]==0.54.0",
+  "pydantic==2.14.1",
+  "numpy==2.5.4",
+  "httpx==0.28.1",
+  "requests==2.34.2",
+  "opentelemetry-api==1.42.1",
+  "opentelemetry-sdk==1.42.1",
+  "opentelemetry-exporter-otlp-proto-http==1.42.1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest==9.1.1",
+  "pytest-asyncio==1.4.0",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["agent_service*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+filterwarnings = [
+  "ignore::DeprecationWarning",
+  "ignore::FutureWarning",
+  "ignore::UserWarning",
+]
